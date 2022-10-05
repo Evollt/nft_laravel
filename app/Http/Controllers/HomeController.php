@@ -40,11 +40,12 @@ class HomeController extends Controller
             ],
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . '3|szcMfMPXNNW8azrCyLG8kVJ2xoDD9ftuHl8ZBliQ'
+                'Authorization' => 'Bearer ' . '17wO6wp3qWVbA3F58hd6DYG6S3RqP6dePqDnhhvn'
             ]
         ]);
 
         return redirect()->back();
         // return $res->getBody();
+        // return $user->sending_status;
     }
 }

@@ -29,9 +29,9 @@
 
     <form action="{{ route('subscribe') }}" method="GET">
         @if(Auth::user()->sending_status)
-            <button>Подписаться</button>
-        @else
             <button>Отписаться</button>
+        @else
+            <button>Подписаться</button>
         @endif
     </form>
     <img src="{{ asset('/storage/' . 'warnings/c6Jzre7kruMLgpYeamvDM3rFbeHT2P9pYKfwDoJl.jpg') }}" alt="dkjdskfljdsflj">

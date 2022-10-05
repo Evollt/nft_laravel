@@ -59,7 +59,7 @@ class SendWarningController extends Controller
             ],
             'headers' => [
                 'Accept' => 'application/jsn',
-                'Authorization' => 'Bearer ' . '3|szcMfMPXNNW8azrCyLG8kVJ2xoDD9ftuHl8ZBliQ'
+                'Authorization' => 'Bearer ' . '17wO6wp3qWVbA3F58hd6DYG6S3RqP6dePqDnhhvn'
             ]
         ]);
 
