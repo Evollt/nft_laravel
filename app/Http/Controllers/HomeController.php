@@ -24,19 +24,23 @@ class HomeController extends Controller
         if(Auth::user()->sending_status) {
             $user->sending_status = 0;
             $user->save();
+
+            $sending_status = false;
         } else {
             $user->sending_status = 1;
             $user->save();
+
+            $sending_status = true;
         }
 
 
         $client = new Client();
         $client->request('POST', "https://botstaging.site/api/v1/subscribe", [
             'json' => [
-                'discord_id' => Auth::user()->discord_id,
-                'name' => Auth::user()->name,
-                'discriminator' => Auth::user()->discriminator,
-                'subscribe' => Auth::user()->sending_status,
+                'discord_id' => $user->discord_id,
+                'name' => $user->name,
+                'discriminator' => $user->discriminator,
+                'subscribe' => $sending_status,
             ],
             'headers' => [
                 'Accept' => 'application/json',
@@ -45,7 +49,5 @@ class HomeController extends Controller
         ]);
 
         return redirect()->back();
-        // return $res->getBody();
-        // return $user->sending_status;
     }
 }
