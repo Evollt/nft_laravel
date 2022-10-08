@@ -23,10 +23,12 @@ class LoginWithDiscordController extends Controller
     }
 
     public function discord() {
+        // эта хуйня переводит на страницу регистрации через discord
         return Socialite::driver('discord')->redirect();
     }
 
     public function discordRedirect() {
+        // это массив с данным о пользователе
         $user = Socialite::driver('discord')->user();
 
         $getDiscriminator = $user->user;
@@ -47,9 +49,10 @@ class LoginWithDiscordController extends Controller
             User::create($userInfo);
         }
 
-        $checkUserInDbSecond = User::where('discord_id', $user->id)->first();
+        // эту хуйню я создаю уже после создания пользователя, чтобы аунтенфицировать его
+        $checkUserInDb = User::where('discord_id', $user->id)->first();
 
-        Auth::login($checkUserInDbSecond);
+        Auth::login($checkUserInDb);
 
         return redirect()->route('dashboard');
     }

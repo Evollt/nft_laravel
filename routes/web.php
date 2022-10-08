@@ -29,7 +29,6 @@ Route::get('/discordRedirect', [LoginWithDiscordController::class, 'discordRedir
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [LoginWithDiscordController::class, 'logout'])->name('logout');
-    Route::get('/user', [HomeController::class, 'user'])->name('user');
     Route::post('/createWarning', [SendWarningController::class, 'createWarning'])->name('createWarning');
     Route::get('/sendWarning/{id}', [SendWarningController::class, 'sendWarning'])->name('sendWarning');
     Route::get('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
