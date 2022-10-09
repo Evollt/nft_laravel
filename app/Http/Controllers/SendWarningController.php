@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WarningRequest;
 use App\Models\Category;
 use App\Models\Warning;
 use App\Models\WarningImages;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SendWarningController extends Controller
 {
-    public function createWarning(Request $req) {
+    public function createWarning(WarningRequest $req) {
         // Берем айдишник той катергории, которую прислал пользователь
         $categories = Category::all();
         $categories = $categories->where('title', $req->category);
@@ -28,20 +29,25 @@ class SendWarningController extends Controller
             'title' => $req->title,
             'text' => $req->text
         ];
-        Warning::create($warningArray);
-        $warningTitle = Warning::all();
-        $warningTitle = $warningTitle->where('title', $req->title)->where('text', $req->text)->first();
-        // нам нужно пройтись по всем изображениям, чтобы понять какое пренадлежит именно тому предупреждению
-        foreach($req->file('images') as $image) {
-            $image = $image->store('warnings', 'public');
 
-            WarningImages::create([
-                'path' => '/storage/' . $image,
-                'warning_id' => $warningTitle->id
-            ]);
+        // Проверяем прикрепил ли пользователь изображения
+        if($req->file('images')) {
+            Warning::create($warningArray);
+            $warningTitle = Warning::all();
+            $warningTitle = $warningTitle->where('title', $req->title)->where('text', $req->text)->first();
+            // нам нужно пройтись по всем изображениям, чтобы понять какое пренадлежит именно тому предупреждению
+            foreach($req->file('images') as $image) {
+                $image = $image->store('warnings', 'public');
+
+                WarningImages::create([
+                    'path' => '/storage/' . $image,
+                    'warning_id' => $warningTitle->id
+                ]);
+            }
         }
 
-        return redirect()->route('sendWarning', [ 'id' => $warningTitle->id ]);
+        // return redirect()->route('sendWarning', [ 'id' => $warningTitle->id ]);
+        return redirect()->back();
     }
 
     public function sendWarning($id) {

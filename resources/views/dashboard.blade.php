@@ -12,6 +12,9 @@
     <form action="{{ route('createWarning') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="text" name="title" placeholder="Название">
+        @error('title')
+            {{ $message }}
+        @enderror
         <input type="text" name="text" placeholder="Текст">
         <input type="file" name="images[]" multiple accept="image/jpeg,image/png">
         <p>Выберите категорию обращения</p>
