@@ -4,15 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Warning;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
-    public function dashboard() {
+    public function index() {
         // здесь передаю категории, чтобы в шаблоне я мог выводить все существующие на данный момент в бд категории предупреждений
-        return view('dashboard', ['data' => Category::all()]);
+
+        $client = new Client();
+        // тут я получаю все ответы администраторов
+        $response = $client->get('https://botstaging.site/api/v1/all-scams', [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer ' . '17wO6wp3qWVbA3F58hd6DYG6S3RqP6dePqDnhhvn'
+            ]
+        ]);
+
+        // $response = $response->getBody();
+        return view('index', ['data' => Category::all(), 'warnings' => json_decode($response->getBody()->getContents(), true), 'searchWarnings' => Warning::all()]);
+    }
+
+    public function delphi() {
+        return view('delphi');
     }
 
     public function subscribe() {
@@ -51,5 +68,13 @@ class HomeController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function search(Request $req)
+    {
+        $s = $req->title;
+        $warnings = Warning::where('title', 'LIKE', "%{$s}%")->get();
+
+        return view('search', ['warnings' => $warnings]);
     }
 }

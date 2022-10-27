@@ -16,21 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
-
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/delphi', [HomeController::class, 'delphi'])->name('delphi');
 Route::get('/login', [LoginWithDiscordController::class, 'login'])->name('login');
-
 Route::get('/discord', [LoginWithDiscordController::class, 'discord'])->name('discord');
-
 Route::get('/discordRedirect', [LoginWithDiscordController::class, 'discordRedirect'])->name('discordRedirect');
+Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::post('/createWarning', [SendWarningController::class, 'createWarning'])->name('createWarning');
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [LoginWithDiscordController::class, 'logout'])->name('logout');
-    Route::post('/createWarning', [SendWarningController::class, 'createWarning'])->name('createWarning');
     Route::get('/sendWarning/{id}', [SendWarningController::class, 'sendWarning'])->name('sendWarning');
     Route::get('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
     Route::get('/scam', [HomeController::class, 'scam'])->name('scam');
+    Route::get('/getScams', [HomeController::class, 'getScams'])->name('getScams');
 });

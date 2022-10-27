@@ -12,14 +12,14 @@ class LoginWithDiscordController extends Controller
 {
     public function login() {
         if(Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('index');
         }
-        return view('login');
+        return redirect()->route('discord');
     }
 
     public function logout() {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('index');
     }
 
     public function discord() {
@@ -54,6 +54,6 @@ class LoginWithDiscordController extends Controller
 
         Auth::login($checkUserInDb);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('index');
     }
 }

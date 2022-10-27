@@ -7,8 +7,10 @@ use App\Models\Category;
 use App\Models\Warning;
 use App\Models\WarningImages;
 use GuzzleHttp\Client;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Storage;
 
 class SendWarningController extends Controller
@@ -30,11 +32,11 @@ class SendWarningController extends Controller
             'text' => $req->text
         ];
 
+        Warning::create($warningArray);
+        $warningTitle = Warning::all();
+        $warningTitle = $warningTitle->where('title', $req->title)->where('text', $req->text)->first();
         // Проверяем прикрепил ли пользователь изображения
-        if($req->file('images')) {
-            Warning::create($warningArray);
-            $warningTitle = Warning::all();
-            $warningTitle = $warningTitle->where('title', $req->title)->where('text', $req->text)->first();
+        if(!empty($req->file('images'))) {
             // нам нужно пройтись по всем изображениям, чтобы понять какое пренадлежит именно тому предупреждению
             foreach($req->file('images') as $image) {
                 $image = $image->store('warnings', 'public');
@@ -46,8 +48,7 @@ class SendWarningController extends Controller
             }
         }
 
-        // return redirect()->route('sendWarning', [ 'id' => $warningTitle->id ]);
-        return redirect()->back();
+        return redirect()->route('sendWarning', [ 'id' => $warningTitle->id ]);
     }
 
     public function sendWarning($id) {
@@ -75,6 +76,6 @@ class SendWarningController extends Controller
             ]
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Данные успешно отправлены');
+        return redirect()->route('index')->with('success', 'Данные успешно отправлены');
     }
 }

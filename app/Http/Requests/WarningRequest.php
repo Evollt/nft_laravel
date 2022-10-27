@@ -24,14 +24,15 @@ class WarningRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required'
+            'title' => 'required|min:5',
+            'text' => 'required|min:20',
+            'category' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'required' => 'Заполните это поле'
         ];
     }
 }
