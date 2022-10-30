@@ -20,7 +20,7 @@ class HomeController extends Controller
         $response = $client->get('https://botstaging.site/api/v1/all-scams', [
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . '17wO6wp3qWVbA3F58hd6DYG6S3RqP6dePqDnhhvn'
+                'Authorization' => 'Bearer ' . 'g56lEczlb6WqdlwG6Tmeb6wC3W6kSHJvPTii7u5S'
             ]
         ]);
 
@@ -63,7 +63,7 @@ class HomeController extends Controller
             ],
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . '17wO6wp3qWVbA3F58hd6DYG6S3RqP6dePqDnhhvn'
+                'Authorization' => 'Bearer ' . 'g56lEczlb6WqdlwG6Tmeb6wC3W6kSHJvPTii7u5S'
             ]
         ]);
 

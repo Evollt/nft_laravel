@@ -19,7 +19,7 @@
   <meta http-equiv="x-dns-prefetch-control" content="on">
   <link rel="stylesheet" href="css/app.css">
   <link rel="dns-prefetch" href="https://ws.tildacdn.com">
-  <link rel="shortcut icon" href="images/tildafavicon.ico" type="image/x-icon" /><!-- Assets -->
+  {{-- <link rel="shortcut icon" href="images/tildafavicon.ico" type="image/x-icon" /><!-- Assets --> --}}
   <script src="https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js" charset="utf-8" async></script>
   <link rel="stylesheet" href="css/tilda-grid-3.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
   <link rel="stylesheet" href="css/tilda-blocks-page30332954.min.css?t=1665668506" type="text/css" media="all"
@@ -2350,7 +2350,7 @@
             data-field-heightunits-value="" data-field-widthunits-value="px" data-animate-mobile="y"
             data-animate-sbs-event="hover"
             data-animate-sbs-opts="[{'ti':'0','mx':'0','my':'0','sx':'1','sy':'1','op':'1','ro':'0','bl':'0','ea':'','dt':'0'},{'ti':'1000','mx':'0','my':'0','sx':1.1,'sy':1.1,'op':0.5,'ro':'0','bl':'0','ea':'','dt':'0'},{'ti':'1000','mx':'0','my':'0','sx':1,'sy':1,'op':1,'ro':'0','bl':'0','ea':'','dt':'0'}]">
-            <div class='tn-atom'><a href="5408967" style="color: inherit">DELPHI </a></div>
+            <div class='tn-atom'><a href="{{ route('delphi') }}" style="color: inherit">DELPHI </a></div>
           </div>
           <div class='t396__elem tn-elem tn-elem__5010695301665501597913' data-elem-id='1665501597913'
             data-elem-type='image' data-field-top-value="78" data-field-top-res-480-value="62"
@@ -4076,7 +4076,7 @@
 
         @media screen and (max-width: 479px) {
           #rec501090885 .tn-elem[data-elem-id="1665503178030"] {
-            top: 321px;
+            top: 175px;
             left: calc(50% - 160px + 14px);
             width: 110px;
           }
@@ -4714,7 +4714,7 @@
           </div>
           <div class='t396__elem tn-elem tn-elem__5010908851665503178030' data-elem-id='1665503178030'
             data-elem-type='text' data-field-top-value="484" data-field-top-res-960-value="484"
-            data-field-top-res-640-value="461" data-field-top-res-480-value="456" data-field-top-res-320-value="321"
+            data-field-top-res-640-value="461" data-field-top-res-480-value="456" data-field-top-res-320-value="175"
             data-field-left-value="170" data-field-left-res-960-value="49" data-field-left-res-640-value="27"
             data-field-left-res-480-value="20" data-field-left-res-320-value="14" data-field-width-value="320"
             data-field-width-res-640-value="217" data-field-width-res-480-value="164"
@@ -4722,12 +4722,27 @@
             data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px"
             data-field-heightunits-value="" data-field-widthunits-value="px">
             <div class='tn-atom' field='tn_text_1665503178030'>
-              <span style="margin-bottom: 10px;">SEARCH</span>
-              <form action="{{ route('search') }}" method="POST">
+              <span>SEARCH</span>
+              <form action="{{ route('search') }}" method="POST" style="margin-top: 20px;">
                 @csrf
-                <input type="text" class="inp" name="title" placeholder="Поиск...">
-                <input type="submit" value="Поиск">
+                <input type="text" class="inp inp-search" style="width: 55%;" name="title" placeholder="Search...">
+                <input type="button" class="btn-search" value="Search">
               </form>
+
+              {{-- {{ $searchWarnings }} --}}
+              <ul class="search-warning" style="height: 100px; max-width: 280px;">
+                @foreach ($searchWarnings as $searchWarning)
+                  <li style="font-size: 15px;">
+                    {{ $searchWarning->title }}
+                    <br>
+                    {{ $searchWarning->text }}
+                    <br>
+                    {{ $searchWarning->created_at }}
+                    <br>
+                    {{ $searchWarning->category->title }}
+                  </li>
+                @endforeach
+              </ul>
             </div>
           </div>
           <div class='t396__elem tn-elem tn-elem__5010908851665503178027' data-elem-id='1665503178027'
@@ -4739,7 +4754,7 @@
             data-field-width-res-320-value="231" data-field-axisy-value="top" data-field-axisx-value="left"
             data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px"
             data-field-heightunits-value="" data-field-widthunits-value="px">
-            <div class='tn-atom' field='tn_text_1665503178027'>DELPH : SAFETY</div>
+            <div class='tn-atom' field='tn_text_1665503178027'>DELPHI : SAFETY</div>
           </div>
           <div class='t396__elem tn-elem tn-elem__5010908851665503178024' data-elem-id='1665503178024'
             data-elem-type='text' data-field-top-value="749" data-field-top-res-960-value="748"
@@ -5971,8 +5986,8 @@
               <span>SEARCH</span>
               <form action="{{ route('search') }}" method="POST" style="margin-top: 20px;">
                 @csrf
-                <input type="text" class="inp inp-search" name="title" placeholder="Поиск...">
-                <input type="button" class="btn-search" value="Поиск">
+                <input type="text" class="inp inp-search" name="title" placeholder="Search...">
+                <input type="button" class="btn-search" value="Search">
               </form>
 
               {{-- {{ $searchWarnings }} --}}
@@ -6000,7 +6015,7 @@
             data-field-width-res-320-value="183" data-field-axisy-value="top" data-field-axisx-value="left"
             data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px"
             data-field-heightunits-value="" data-field-widthunits-value="px">
-            <div class='tn-atom' field='tn_text_1665503178027'>DELPH : SAFETY</div>
+            <div class='tn-atom' field='tn_text_1665503178027'>DELPHI : SAFETY</div>
           </div>
           <div class='t396__elem tn-elem tn-elem__5002809051665503178024' data-elem-id='1665503178024'
             data-elem-type='text'>
@@ -6034,7 +6049,7 @@
                 @endforeach
               </select>
               <br>
-              <input type="submit" class="btn" value="Отправить">
+              <input type="submit" class="btn" value="Send">
           </form>
           </div>
           <div class='t396__elem tn-elem tn-elem__5002809051665503178021' data-elem-id='1665503178021'
@@ -6048,7 +6063,7 @@
             data-field-widthunits-value="px">
 
             @if(Auth::check())
-              <div class='tn-atom'><a href="{{ route('logout') }}" style="color: inherit">LOGOUT</a></div>
+              <div class='tn-atom'><a href="{{ route('logout') }}" style="color: inherit">EXIT</a></div>
             @else
               <div class='tn-atom'><a href="{{ route('discord') }}" style="color: inherit">LOGIN</a></div>
             @endif
@@ -6442,7 +6457,7 @@
         #rec500849753 .tn-elem[data-elem-id="1665621524599"] {
           color: #ffffff;
           z-index: 11;
-          top: 655px;
+          top: 235px;
           left: calc(50% - 600px + 21px);
           width: 746px;
         }
@@ -6498,7 +6513,7 @@
         #rec500849753 .tn-elem[data-elem-id="1665621524594"] {
           color: #ffffff;
           z-index: 10;
-          top: 1130px;
+          top: 710px;
           left: calc(50% - 600px + 21px);
           width: 746px;
         }
@@ -6610,7 +6625,7 @@
         #rec500849753 .tn-elem[data-elem-id="1665621524582"] {
           color: #ffffff;
           z-index: 8;
-          top: 730px;
+          top: 310px;
           left: calc(50% - 600px + 21px);
           width: 1158px;
         }
@@ -6800,7 +6815,7 @@
         #rec500849753 .tn-elem[data-elem-id="1665626169497"] {
           color: #ffffff;
           z-index: 13;
-          top: 1205px;
+          top: 785px;
           left: calc(50% - 600px + 20px);
           width: 1132px;
         }
@@ -7267,7 +7282,7 @@
             <div class='tn-atom'> </div>
           </div>
           <div class='t396__elem tn-elem tn-elem__5008497531665621524599' data-elem-id='1665621524599'
-            data-elem-type='text' data-field-top-value="655" data-field-top-res-960-value="775"
+            data-elem-type='text' data-field-top-value="235" data-field-top-res-960-value="775"
             data-field-top-res-640-value="959" data-field-top-res-480-value="1125" data-field-top-res-320-value="667"
             data-field-left-value="21" data-field-left-res-960-value="0" data-field-left-res-640-value="0"
             data-field-left-res-480-value="0" data-field-left-res-320-value="0" data-field-width-value="746"
@@ -7278,7 +7293,7 @@
             <div class='tn-atom' field='tn_text_1665621524599'>GOALS</div>
           </div>
           <div class='t396__elem tn-elem tn-elem__5008497531665621524594' data-elem-id='1665621524594'
-            data-elem-type='text' data-field-top-value="1130" data-field-top-res-960-value="1310"
+            data-elem-type='text' data-field-top-value="710" data-field-top-res-960-value="1310"
             data-field-top-res-640-value="1578" data-field-top-res-480-value="1790" data-field-top-res-320-value="1070"
             data-field-left-value="21" data-field-left-res-960-value="0" data-field-left-res-640-value="0"
             data-field-left-res-480-value="0" data-field-left-res-320-value="0" data-field-width-value="746"
@@ -7300,7 +7315,7 @@
             <div class='tn-atom' field='tn_text_1665621524588'><strong>VISION</strong></div>
           </div>
           <div class='t396__elem tn-elem tn-elem__5008497531665621524582' data-elem-id='1665621524582'
-            data-elem-type='text' data-field-top-value="730" data-field-top-res-960-value="860"
+            data-elem-type='text' data-field-top-value="310" data-field-top-res-960-value="860"
             data-field-top-res-640-value="1026" data-field-top-res-480-value="1175" data-field-top-res-320-value="707"
             data-field-left-value="21" data-field-left-res-960-value="0" data-field-left-res-640-value="0"
             data-field-left-res-480-value="0" data-field-left-res-320-value="1" data-field-width-value="1158"
@@ -7330,33 +7345,10 @@
             data-field-width-res-480-value="480" data-field-width-res-320-value="320" data-field-axisy-value="top"
             data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px"
             data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px">
-            <div class='tn-atom' field='tn_text_1665621524572'><span style="font-weight: 400;">Talking about the
-                community, each holder will feel safe, appreciated and welcome. We want our server, the home of our
-                community, to contain the perfect mix of useful information (Alpha, education, analysis) and
-                entertainment. Eventually we plan to achieve this using our own product </span><span
-                style="font-weight: 500;">delphi-subscriptions</span><span
-                style="font-weight: 400;">.</span><br><br><span style="font-weight: 400;">Moving to the more serious
-                stuff. We are going to be looking at a lot of things from a business perspective. Oracles will focus on
-                developing products that will be used by the whole ecosystem. All these products will have monetisation
-                mechanics embedded into them to generate revenue for the project and it's holders, excluding our safety
-                products which will be completely free to use, as their goal is to make the ecosystem safer and help as
-                many people as possible. At the heart of all this is going to be the DELPHI multi-utility platform.
-                Check more info on the products we plan to bring first here:</span><br><br>
-              <ul>
-                <li><span style="font-weight: 500;">delphi-safe-bot</span></li>
-                <li><span style="font-weight: 500;">delphi-subscriptions</span></li>
-                <li><span style="font-weight: 500;">delphi-predictions</span></li>
-              </ul><em style="font-weight: 400;"> </em><br><span style="font-weight: 400;">To find out when and in which
-                order we will deliver this, check </span><span style="font-weight: 500;">roadmap</span><br><br><span
-                style="font-weight: 400;">Another thing that we believe in is the fact that projects own a large part of
-                their success to the people who believed and invested in them. This is why I promise Oracle holders 2
-                things.</span><br><br><span style="font-weight: 400;">1) Holders will get substantial benefits on any
-                platform or product we ever roll out.</span><br><br><span style="font-weight: 400;">2) Holders will
-                receive part of the profits we make from any platform or product via rev share.</span><br><br><span
-                style="font-weight: 400;">At oracles we are not going to be trying to conquer everyone, get everyone to
-                recognise us. We will be looking to bring together likeminded individuals who share our goals and
-                long-term vision. We will just make cool stuff and no doubt become a household name not only on sol, but
-              </span><span style="font-weight: 500;">cross-chain</span><span style="font-weight: 400;">.</span>
+            <div class='tn-atom' field='tn_text_1665621524572'><span style="font-weight: 400;">
+              At oracles is to provide value to our holders and the NFT ecosystem as whole. You will see this approach throughout our current product line and throughout any products we release in the future.
+            </span>
+                <br><br><span style="font-weight: 400;">Apart from a solid community we will aim at creating multiple revenue streams to back our project. We won't chase meta's and will focus on building products that will last and be in demand perpetually.</span><br><br>
             </div>
           </div>
           <div class='t396__elem tn-elem color tn-elem__5008497531665625519963' data-elem-id='1665625519963'
@@ -7374,7 +7366,7 @@
             <div class='tn-atom'> </div>
           </div>
           <div class='t396__elem tn-elem accord tn-elem__5008497531665626169497' data-elem-id='1665626169497'
-            data-elem-type='text' data-field-top-value="1205" data-field-top-res-960-value="1395"
+            data-elem-type='text' data-field-top-value="785" data-field-top-res-960-value="1395"
             data-field-top-res-640-value="1645" data-field-top-res-480-value="1840" data-field-top-res-320-value="1110"
             data-field-left-value="20" data-field-left-res-960-value="0" data-field-left-res-640-value="0"
             data-field-left-res-480-value="0" data-field-left-res-320-value="0" data-field-width-value="1132"
@@ -7383,14 +7375,23 @@
             data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px"
             data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px">
             <div class='tn-atom' field='tn_text_1665626169497'>Where and when will you mint?<br><br><span
-                style="font-weight: 400;">Our mint will take place on the SOLANA blockchain, on a well-known &amp;
-                trusted launchpad anywhere from mid to end of October.</span><br><br>What's the supply &amp; price of
-              Oracles?<br><br><span style="font-weight: 400;">The supply will range from 4.5k to 5.5k NFT's. The price
-                will be chosen depending on SOLANA price closer to mint. Currently we are looking at 1.49-2.49 sol per
-                NFT.</span><br><br>Are you doxxed?<br><br><span style="font-weight: 400;">Yes we are doxxed with Alder
-                Mages.</span><br><br>Why should I mint &amp; hold an Oracle?<br><br><span style="font-weight: 400;">Each
-                holder will receive multiple benefits on each of our platforms. They will also depend on the number of
-                NFT's you hold. And staking your oralces will get you access to rev-share from out products.</span>
+                style="font-weight: 400;">
+                Where and when will you mint?
+
+Our mint will take place on the SOLANA blockchain, on Solanart Launchpad on the 29th of October.
+<br>
+What's the supply & price of Oracles?
+<br>
+The supply is 3333 NFTs. The price 1.49 sol per NFT.
+<br>
+Are you doxxed?
+<br>
+Yes we are doxxed with Alder Mages.
+<br>
+Why should I mint & hold an Oracle?
+<br>
+Each holder will receive multiple benefits on each of our platforms. They will also depend on the number of NFT's you hold. And staking your oralces will get you access to rev-share from out products.
+              </span>
             </div>
           </div>
           <div class='t396__elem tn-elem accord tn-elem__5008497531665626209433' data-elem-id='1665626209433'
